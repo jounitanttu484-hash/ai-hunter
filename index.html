@@ -3,151 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Hunter - Best AI Tools Directory</title>
+    <title>AI Hunter - The Best AI Tools</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
     <style>
-        /* --- AI / CYBERPUNK TEEMA --- */
+        /* --- MODERN AI THEME --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #8b5cf6; /* Violetti */
+            --accent-hover: #7c3aed;
+        }
+
         body { 
-            font-family: 'Segoe UI', Tahoma, sans-serif; 
-            padding: 20px; 
-            background: #0f0c29; 
-            background: linear-gradient(to right, #24243e, #302b63, #0f0c29); 
-            color: #fff; 
-            min-height: 100vh; 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0; padding: 20px;
+            line-height: 1.5;
         }
         
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            background: rgba(255, 255, 255, 0.96); 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            color: #333; 
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
         
-        .header-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; flex-wrap: wrap; gap: 20px; }
-        
-        h1 { color: #2c3e50; margin: 0; font-weight: 800; letter-spacing: -1px; }
-        .logo-accent { color: #8e44ad; background: -webkit-linear-gradient(#8e44ad, #3498db); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: #666; font-size: 0.9em; }
+        /* HEADER */
+        .header { text-align: center; margin-bottom: 40px; padding: 40px 0; border-bottom: 1px solid #334155; }
+        h1 { font-size: 3rem; margin: 0; background: linear-gradient(to right, #a78bfa, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        .subtitle { color: var(--text-muted); font-size: 1.2rem; margin-top: 10px; }
 
-        /* MAINOSPAIKKA */
-        .ad-space {
-            width: 100%;
-            background-color: #f3e5f5;
-            border: 2px dashed #8e44ad;
-            text-align: center;
-            padding: 15px;
-            margin-bottom: 30px;
+        /* CONTROLS */
+        .controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+        
+        input, select {
+            background: var(--card-bg);
+            border: 1px solid #334155;
+            color: white;
+            padding: 12px 20px;
             border-radius: 8px;
-            color: #8e44ad;
-            font-weight: bold;
-            font-size: 0.85em;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2); }
+        .search-box { width: 300px; }
+
+        /* GRID LAYOUT (KORTIT) */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        /* FILTTERIT */
-        .controls { display: flex; gap: 10px; flex-wrap: wrap; }
-        .search-box, .filter-select { padding: 12px; border: 2px solid #e1e4e8; border-radius: 8px; outline: none; font-size: 16px; }
-        .search-box:focus, .filter-select:focus { border-color: #8e44ad; }
+        .tool-card {
+            background: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-        /* TAULUKKO */
-        .table-container { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
-        th { background: #2c3e50; color: #fff; cursor: pointer; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; }
-        th:hover { background: #34495e; }
-        tr:hover { background-color: #f8f9fa; }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-color: var(--accent);
+        }
+
+        .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .tool-name { font-size: 1.4em; font-weight: bold; color: #fff; }
+        .tool-cat { font-size: 0.75em; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); background: rgba(139, 92, 246, 0.1); padding: 4px 8px; border-radius: 4px; font-weight: bold; }
         
-        /* TAGIT */
-        .cat-tag { background: #e1bee7; color: #4a148c; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85em; display: inline-block; }
-        .price-tag { color: #27ae60; font-weight: 800; font-size: 0.95em; }
-        .tag-small { font-size: 0.75em; color: #666; background: #eee; padding: 2px 6px; border-radius: 4px; margin-right: 5px; }
-
+        .tool-desc { color: var(--text-muted); font-size: 0.95em; margin-bottom: 20px; flex-grow: 1; }
+        
+        .tool-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #334155; padding-top: 15px; margin-top: 10px; }
+        .tool-price { font-weight: bold; color: #2dd4bf; font-size: 0.9em; }
+        
         .btn-visit { 
-            background: linear-gradient(45deg, #8e44ad, #3498db); 
-            color: white; padding: 8px 16px; border-radius: 20px; 
-            text-decoration: none; font-weight: bold; font-size: 0.9em; 
-            display: inline-block; transition: 0.3s; 
+            background: var(--accent); 
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 0.9em;
+            transition: 0.3s;
         }
-        .btn-visit:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3); }
+        .btn-visit:hover { background: var(--accent-hover); }
 
-        /* VASTUUVAPAUSLAUSEKE */
-        .affiliate-note { background: #fdf2f2; color: #c0392b; font-size: 0.8em; padding: 10px; border-radius: 5px; margin-bottom: 20px; border-left: 3px solid #c0392b; }
+        /* MAINOKSET */
+        .ad-banner { background: #1e293b; border: 1px dashed #475569; color: #475569; text-align: center; padding: 20px; border-radius: 10px; margin: 20px 0; font-size: 0.9em; }
 
-        @media (max-width: 768px) {
-            .header-wrapper { flex-direction: column; align-items: flex-start; }
-            .controls { width: 100%; flex-direction: column; }
-            .col-desc { display: none; }
-        }
+        .affiliate-note { text-align: center; color: var(--text-muted); font-size: 0.8em; margin-bottom: 40px; opacity: 0.7; }
+
     </style>
 </head>
 <body>
 
 <div class="container">
     
-    <div class="affiliate-note">
-        <strong>Disclaimer:</strong> This database is reader-supported. When you buy through links on our site, we may earn an affiliate commission at no extra cost to you.
+    <div class="header">
+        <h1>AI<span style="color:var(--accent)">Hunter</span></h1>
+        <div class="subtitle">Discover the Best AI Tools of 2026</div>
     </div>
 
-    <div class="ad-space">
-        TOP BANNER AD SPACE
+    <div class="ad-banner">
+        TOP ADVERTISEMENT SPACE
     </div>
 
-    <div class="header-wrapper">
-        <div>
-            <h1>AI<span class="logo-accent">Hunter</span></h1>
-            <div class="subtitle">The Ultimate AI Tool Directory 2026</div>
-        </div>
+    <div class="controls">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search tools (e.g. Chat, Video)..." onkeyup="filterData()">
         
-        <div class="controls">
-            <input type="text" id="searchInput" class="search-box" placeholder="Search (e.g. Chat, Video)..." onkeyup="filterData()">
-            
-            <select id="catSelect" class="filter-select" onchange="filterData()">
-                <option value="all">All Categories</option>
-                <option value="Text">Text & Chat</option>
-                <option value="Image">Image Gen</option>
-                <option value="Video">Video & Audio</option>
-                <option value="Coding">Coding & Dev</option>
-                <option value="Marketing">Marketing & Copy</option>
-            </select>
-        </div>
+        <select id="catSelect" onchange="filterData()">
+            <option value="all">All Categories</option>
+            <option value="Text">Text & Chat</option>
+            <option value="Image">Image Generators</option>
+            <option value="Video">Video & Audio</option>
+            <option value="Coding">Coding & Dev</option>
+            <option value="Marketing">Marketing</option>
+        </select>
     </div>
 
-    <div id="loader" style="color:#8e44ad; text-align:center; font-weight:bold; margin: 40px 0;">Loading AI Tools...</div>
+    <div id="loader" style="text-align:center; color:var(--accent);">Loading AI Tools...</div>
 
-    <div class="table-container">
-        <table id="mainTable" style="display:none;">
-            <thead>
-                <tr>
-                    <th onclick="sortHosts('name')">Tool Name ⇅</th>
-                    <th>Category</th>
-                    <th class="col-desc">Description</th>
-                    <th onclick="sortHosts('price')">Pricing ⇅</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody id="mainTableBody"></tbody>
-        </table>
+    <div id="gridContainer" class="tools-grid"></div>
+
+    <div class="ad-banner">
+        BOTTOM ADVERTISEMENT SPACE
     </div>
 
-    <div class="ad-space" style="margin-top:40px;">
-        BOTTOM BANNER AD SPACE
+    <div class="affiliate-note">
+        Transparency: We may earn a commission from links on this page. This helps support the project.
     </div>
 
 </div>
 
 <script>
-// ------------------------------------------------------------------
-// ASETUKSET - SINUN LINKKISI ON NYT TÄSSÄ:
+// --- ASETUKSET ---
+// TÄMÄ ON SAMA LINKKI KUIN AIEMMIN, EI TARVITSE MUUTTAA
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQyHdzQVChJsaHoWO0iOSlhQpZvU07g0pFZBmf47J3eNxghQMlyTuPIgL1RHEQKHK-v-ZmF9hSabIqD/pub?output=csv";
-// ------------------------------------------------------------------
+// -----------------
 
 let toolsData = [];
 let currentData = [];
-let sortAsc = true;
 
 window.onload = function() {
     fetchData();
@@ -158,50 +159,45 @@ function fetchData() {
         download: true,
         header: true,
         complete: function(results) {
-            // Suodatetaan tyhjät rivit ja tallennetaan
             toolsData = results.data.filter(row => row.name && row.category);
             currentData = [...toolsData];
-            
             document.getElementById("loader").style.display = "none";
-            document.getElementById("mainTable").style.display = "table";
-            sortHosts('name'); // Järjestetään aluksi nimen mukaan
+            renderGrid();
         },
         error: function(err) {
-            document.getElementById("loader").innerText = "Error loading data from Google Sheets.";
-            console.error(err);
+            document.getElementById("loader").innerText = "Error loading data.";
         }
     });
 }
 
-function renderTable() {
-    const tbody = document.getElementById("mainTableBody");
-    tbody.innerHTML = "";
+// UUSI FUNKTIO: Renderöi kortit taulukon sijaan
+function renderGrid() {
+    const container = document.getElementById("gridContainer");
+    container.innerHTML = "";
     
     if (currentData.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px;">No tools found.</td></tr>`;
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#666;">No tools found.</div>`;
         return;
     }
 
     currentData.forEach(t => {
-        // Rakennetaan pienet tagit (jos ne on sheetissä)
-        let tagsHTML = "";
-        if(t.tag1) tagsHTML += `<span class="tag-small">${t.tag1}</span>`;
-        if(t.tag2) tagsHTML += `<span class="tag-small">${t.tag2}</span>`;
-
-        tbody.innerHTML += `
-            <tr>
-                <td>
-                    <div style="font-weight:bold; font-size:1.1em;">${t.name}</div>
-                    <div style="margin-top:5px;">${tagsHTML}</div>
-                </td>
-                <td><span class="cat-tag">${t.category}</span></td>
-                <td class="col-desc" style="color:#555; font-size:0.95em;">${t.desc || ''}</td>
-                <td><span class="price-tag">${t.price}</span></td>
-                <td>
+        // Luodaan kortti HTML
+        const card = `
+            <div class="tool-card">
+                <div>
+                    <div class="tool-header">
+                        <div class="tool-name">${t.name}</div>
+                        <div class="tool-cat">${t.category.split(' ')[0]}</div>
+                    </div>
+                    <div class="tool-desc">${t.desc || 'No description available.'}</div>
+                </div>
+                <div class="tool-footer">
+                    <div class="tool-price">${t.price}</div>
                     <a href="${t.url}" target="_blank" class="btn-visit">Visit &rarr;</a>
-                </td>
-            </tr>
+                </div>
+            </div>
         `;
+        container.innerHTML += card;
     });
 }
 
@@ -214,23 +210,13 @@ function filterData() {
         
         let matchesCat = true;
         if (cat !== "all") {
-            // Etsitään kategoriaa joustavasti (esim. "Video" löytää "Video Gen")
             matchesCat = t.category && t.category.toLowerCase().includes(cat.toLowerCase());
         }
 
         return matchesSearch && matchesCat;
     });
     
-    renderTable();
-}
-
-function sortHosts(key) {
-    sortAsc = !sortAsc;
-    currentData.sort((a,b) => {
-        let A = a[key] || "", B = b[key] || "";
-        return sortAsc ? A.localeCompare(B) : B.localeCompare(A);
-    });
-    renderTable();
+    renderGrid();
 }
 </script>
 
