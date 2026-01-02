@@ -3,147 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Hunter - The Best AI Tools</title>
     
+    <title>AI Hunter - The Ultimate AI Tools Directory 2026</title>
+    <meta name="description" content="Discover the best AI tools for 2026. Compare ChatGPT, Midjourney, Jasper, and 50+ other artificial intelligence software for text, image, video, and coding.">
+    <meta name="keywords" content="AI tools, best AI software, AI directory, ChatGPT alternatives, generative AI, AI comparison">
+    <meta name="author" content="AI Hunter">
+    
+    <meta property="og:title" content="AI Hunter - Find the Best AI Tools">
+    <meta property="og:description" content="Compare the top AI tools for text, design, and coding. Updated for 2026.">
+    <meta property="og:type" content="website">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "AI Hunter Directory",
+      "description": "A curated list of the best Artificial Intelligence tools.",
+      "audience": "Developers, Creators, Marketers",
+      "about": {
+        "@type": "Thing",
+        "name": "Artificial Intelligence Software"
+      }
+    }
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
     <style>
-        /* --- MODERN AI THEME --- */
+        /* --- LIGHT THEME (CLEAN TECH) --- */
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #8b5cf6; /* Violetti */
-            --accent-hover: #7c3aed;
+            --bg-body: #f8fafc;       /* Todella vaalea harmaa */
+            --bg-card: #ffffff;       /* Valkoinen */
+            --text-main: #0f172a;     /* Tumma teksti */
+            --text-muted: #64748b;    /* Harmaa teksti */
+            --primary: #2563eb;       /* Kirkas sininen */
+            --primary-hover: #1d4ed8;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         body { 
-            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
-            background-color: var(--bg-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background-color: var(--bg-body);
             color: var(--text-main);
-            margin: 0; padding: 20px;
-            line-height: 1.5;
+            margin: 0; padding: 0;
+            line-height: 1.6;
         }
         
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         
         /* HEADER */
-        .header { text-align: center; margin-bottom: 40px; padding: 40px 0; border-bottom: 1px solid #334155; }
-        h1 { font-size: 3rem; margin: 0; background: linear-gradient(to right, #a78bfa, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-        .subtitle { color: var(--text-muted); font-size: 1.2rem; margin-top: 10px; }
+        header { text-align: center; padding: 60px 20px 40px; }
+        h1 { font-size: 3rem; margin: 0; color: var(--text-main); letter-spacing: -0.02em; font-weight: 800; }
+        .subtitle { color: var(--text-muted); font-size: 1.25rem; margin-top: 10px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .highlight { color: var(--primary); }
 
         /* CONTROLS */
-        .controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+        .controls-wrapper {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
         
         input, select {
-            background: var(--card-bg);
-            border: 1px solid #334155;
-            color: white;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            color: var(--text-main);
             padding: 12px 20px;
             border-radius: 8px;
             font-size: 16px;
             outline: none;
-            transition: 0.3s;
+            transition: 0.2s;
         }
-        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2); }
-        .search-box { width: 300px; }
+        input:focus, select:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .search-box { flex-grow: 1; max-width: 400px; }
 
-        /* GRID LAYOUT (KORTIT) */
+        /* GRID LAYOUT */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* Hieman leveämmät kortit */
+            gap: 30px;
         }
 
         .tool-card {
-            background: var(--card-bg);
-            border: 1px solid #334155;
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 25px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            overflow: hidden;
         }
 
         .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
         }
 
         .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
-        .tool-name { font-size: 1.4em; font-weight: bold; color: #fff; }
-        .tool-cat { font-size: 0.75em; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); background: rgba(139, 92, 246, 0.1); padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+        .tool-name { font-size: 1.35em; font-weight: 700; color: var(--text-main); }
+        .tool-cat { 
+            font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.5px; 
+            color: var(--primary); background: #eff6ff; 
+            padding: 6px 10px; border-radius: 20px; font-weight: 700; 
+        }
         
-        .tool-desc { color: var(--text-muted); font-size: 0.95em; margin-bottom: 20px; flex-grow: 1; }
+        /* TAGIT (LISÄTTY INFO) */
+        .tool-tags { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .tag-pill { 
+            font-size: 0.75em; color: var(--text-muted); 
+            background: #f1f5f9; border: 1px solid var(--border); 
+            padding: 3px 8px; border-radius: 6px; 
+        }
+
+        .tool-desc { color: var(--text-muted); font-size: 0.95em; margin-bottom: 25px; line-height: 1.5; flex-grow: 1; }
         
-        .tool-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #334155; padding-top: 15px; margin-top: 10px; }
-        .tool-price { font-weight: bold; color: #2dd4bf; font-size: 0.9em; }
+        .tool-footer { 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-top: 1px solid var(--border); padding-top: 20px; margin-top: 10px; 
+        }
+        .tool-price { font-weight: 700; color: #059669; font-size: 1em; background: #ecfdf5; padding: 4px 8px; border-radius: 6px; }
         
         .btn-visit { 
-            background: var(--accent); 
-            color: white; 
-            padding: 8px 20px; 
-            border-radius: 6px; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.9em;
-            transition: 0.3s;
+            background: var(--primary); color: white; 
+            padding: 10px 20px; border-radius: 8px; 
+            text-decoration: none; font-weight: 600; font-size: 0.9em;
+            transition: 0.2s;
         }
-        .btn-visit:hover { background: var(--accent-hover); }
+        .btn-visit:hover { background: var(--primary-hover); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
 
         /* MAINOKSET */
-        .ad-banner { background: #1e293b; border: 1px dashed #475569; color: #475569; text-align: center; padding: 20px; border-radius: 10px; margin: 20px 0; font-size: 0.9em; }
+        .ad-banner { background: #f8fafc; border: 2px dashed #cbd5e1; color: #94a3b8; text-align: center; padding: 30px; border-radius: 12px; margin: 40px 0; font-weight: 600; }
 
-        .affiliate-note { text-align: center; color: var(--text-muted); font-size: 0.8em; margin-bottom: 40px; opacity: 0.7; }
+        /* SEO TEXT SECTION (UUSI) */
+        .seo-section { margin-top: 60px; border-top: 1px solid var(--border); padding-top: 40px; color: var(--text-muted); }
+        .seo-section h2 { color: var(--text-main); font-size: 1.5em; margin-bottom: 15px; }
+        .seo-section p { margin-bottom: 15px; font-size: 0.95em; }
+
+        .disclaimer { text-align: center; color: var(--text-muted); font-size: 0.85em; margin: 40px 0; padding: 20px; background: #f1f5f9; border-radius: 8px; }
 
     </style>
 </head>
 <body>
 
+<header>
+    <h1>AI <span class="highlight">Hunter</span></h1>
+    <p class="subtitle">The curated directory of the best AI tools, software, and platforms for 2026.</p>
+</header>
+
 <div class="container">
-    
-    <div class="header">
-        <h1>AI<span style="color:var(--accent)">Hunter</span></h1>
-        <div class="subtitle">Discover the Best AI Tools of 2026</div>
-    </div>
 
     <div class="ad-banner">
-        TOP ADVERTISEMENT SPACE
+        SPONSORED / ADVERTISEMENT SPACE
     </div>
 
-    <div class="controls">
-        <input type="text" id="searchInput" class="search-box" placeholder="Search tools (e.g. Chat, Video)..." onkeyup="filterData()">
+    <div class="controls-wrapper">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search tools (e.g. Chat, Generator, Code)..." onkeyup="filterData()">
         
         <select id="catSelect" onchange="filterData()">
             <option value="all">All Categories</option>
-            <option value="Text">Text & Chat</option>
-            <option value="Image">Image Generators</option>
+            <option value="Text">Text & Writing</option>
+            <option value="Image">Image & Art</option>
             <option value="Video">Video & Audio</option>
             <option value="Coding">Coding & Dev</option>
-            <option value="Marketing">Marketing</option>
+            <option value="Marketing">Business & Marketing</option>
+            <option value="Productivity">Productivity</option>
         </select>
     </div>
 
-    <div id="loader" style="text-align:center; color:var(--accent);">Loading AI Tools...</div>
+    <div id="loader" style="text-align:center; color:var(--primary); font-weight:bold; font-size:1.2em;">Loading Database...</div>
 
-    <div id="gridContainer" class="tools-grid"></div>
+    <main id="gridContainer" class="tools-grid"></main>
 
     <div class="ad-banner">
-        BOTTOM ADVERTISEMENT SPACE
+        BOTTOM AD SPACE
     </div>
 
-    <div class="affiliate-note">
-        Transparency: We may earn a commission from links on this page. This helps support the project.
+    <section class="seo-section">
+        <h2>Why use AI Tools in 2026?</h2>
+        <p>Artificial Intelligence has revolutionized how we work. Whether you are looking for <strong>ChatGPT alternatives</strong>, the best <strong>AI image generators</strong> like Midjourney, or coding assistants like GitHub Copilot, our directory helps you find the right software.</p>
+        
+        <h3>How to choose the best AI software?</h3>
+        <p>Consider pricing (Free vs Paid), specific features (e.g., SEO writing vs Creative writing), and ease of use. Tools listed here cover categories from text generation to video editing and productivity automation.</p>
+    </section>
+
+    <div class="disclaimer">
+        <strong>Transparency Disclosure:</strong> AI Hunter is reader-supported. Some links in this directory may be affiliate links, meaning we earn a commission if you make a purchase, at no extra cost to you. We only list reputable tools.
     </div>
 
 </div>
 
 <script>
 // --- ASETUKSET ---
-// TÄMÄ ON SAMA LINKKI KUIN AIEMMIN, EI TARVITSE MUUTTAA
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQyHdzQVChJsaHoWO0iOSlhQpZvU07g0pFZBmf47J3eNxghQMlyTuPIgL1RHEQKHK-v-ZmF9hSabIqD/pub?output=csv";
 // -----------------
 
@@ -165,37 +227,43 @@ function fetchData() {
             renderGrid();
         },
         error: function(err) {
-            document.getElementById("loader").innerText = "Error loading data.";
+            document.getElementById("loader").innerText = "Error loading data. Please check your connection.";
         }
     });
 }
 
-// UUSI FUNKTIO: Renderöi kortit taulukon sijaan
 function renderGrid() {
     const container = document.getElementById("gridContainer");
     container.innerHTML = "";
     
     if (currentData.length === 0) {
-        container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:#666;">No tools found.</div>`;
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#64748b;">No tools found matching your search.</div>`;
         return;
     }
 
     currentData.forEach(t => {
-        // Luodaan kortti HTML
+        // Tagien käsittely (Lisää infoa korttiin)
+        let tagsHTML = "";
+        if(t.tag1) tagsHTML += `<span class="tag-pill">${t.tag1}</span>`;
+        if(t.tag2) tagsHTML += `<span class="tag-pill">${t.tag2}</span>`;
+
         const card = `
-            <div class="tool-card">
+            <article class="tool-card">
                 <div>
                     <div class="tool-header">
                         <div class="tool-name">${t.name}</div>
                         <div class="tool-cat">${t.category.split(' ')[0]}</div>
                     </div>
-                    <div class="tool-desc">${t.desc || 'No description available.'}</div>
+                    
+                    <div class="tool-tags">${tagsHTML}</div>
+
+                    <p class="tool-desc">${t.desc || 'No description available for this tool.'}</p>
                 </div>
                 <div class="tool-footer">
                     <div class="tool-price">${t.price}</div>
-                    <a href="${t.url}" target="_blank" class="btn-visit">Visit &rarr;</a>
+                    <a href="${t.url}" target="_blank" rel="nofollow sponsored" class="btn-visit">Visit Site &rarr;</a>
                 </div>
-            </div>
+            </article>
         `;
         container.innerHTML += card;
     });
@@ -207,12 +275,10 @@ function filterData() {
 
     currentData = toolsData.filter(t => {
         const matchesSearch = (t.name && t.name.toLowerCase().includes(q)) || (t.desc && t.desc.toLowerCase().includes(q));
-        
         let matchesCat = true;
         if (cat !== "all") {
             matchesCat = t.category && t.category.toLowerCase().includes(cat.toLowerCase());
         }
-
         return matchesSearch && matchesCat;
     });
     
